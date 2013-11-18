@@ -30,18 +30,6 @@ qplot(n, data = pkgs %.% filter(n < 100))
 summarise(pkgs, sum(n > 100), sum(n[n > 100]), sum(n))
 
 
-# st511: can you find Charlotte's students? 
-# They downloaded ggplot2, openintro and Sleuth2
-recent <- filter(logs, date > as.Date("2013-09-25"))
-by_person <- group_by(recent, date, ip_id)
-
-used_by <- filter(by_person, package %in% c("ggplot2", "openintro", "Sleuth2", "evaluate", "knitr"))
-poss <- filter(summarise(used_by, n = n()), n >= 3)
-
-qplot(as.Date(date, origin = "1970-01-01"), n, data = summarise(poss, n = sum(n)), geom = "line")
-
-
-
 poss2 <- semi_join(by_person, poss)
 
 dplyr:::summarise.grouped_df(by_person, sum(package %in% ))
