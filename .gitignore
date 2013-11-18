@@ -1,0 +1,6 @@
+logs/*
+.Rproj.user
+.Rhistory
+.dropbox
+"Icon^M"
+logs.rds
