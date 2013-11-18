@@ -4,22 +4,6 @@ library(lubridate)
 
 logs <- readRDS("logs.rds")
 
-by_day <- group_by(logs, date)
-out <- summarise(by_day, n = n(), users = max(ip_id))
-out
-
-out$wday <- wday(out$date, label = TRUE)
-
-qplot(date, n, data = out, geom = "line") + geom_smooth(se = F, size = 2) + 
-  labs(x = NULL, y = "Package downloads")
-ggsave("cran-downloads.pdf", width = 8, height = 6)
-
-qplot(date, users, data = out, geom = "line") + geom_smooth(se = F)
-
-out$n2 <- 10 ^ resid(lm(log10(n) ~ wday, data = out))
-out$users2 <- 10 ^ resid(lm(log10(users) ~ wday, data = out))
-qplot(date, n2, data = out, geom = "line")
-
 # Look at the top 20 packages ---------------
 
 by_package <- group_by(logs, package)
