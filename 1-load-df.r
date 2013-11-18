@@ -17,7 +17,9 @@ ok <- Map(download.file, urls[missing], paths[missing])
 
 logs <- dir("logs", full.name = TRUE)
 all_pkgs <- lapply(logs, read.csv, stringsAsFactors = FALSE)
-all <- rbind.fill(all_pkgs)
 
+all <- rbind.fill(all_pkgs)
 all$date <- as.Date(all$date)
+class(all) <- c("tbl_cpp", "tbl", class(all))
+
 saveRDS(all, file = "logs.rds")
