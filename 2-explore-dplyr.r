@@ -3,8 +3,6 @@ library(ggplot2)
 library(lubridate)
 
 logs <- readRDS("logs.rds")
-logs <- tbl_cpp(logs)
-summarise(logs, n())
 
 by_day <- group_by(logs, date)
 out <- summarise(by_day, n = n(), users = max(ip_id))
