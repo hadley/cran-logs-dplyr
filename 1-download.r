@@ -6,10 +6,11 @@ start <- as.Date('2013-01-01')
 yesterday <- Sys.Date() - 1
 days <- seq(start, yesterday, by = 'day')
 
-years <- as.POSIXlt(all_days)$year + 1900
+years <- as.POSIXlt(days)$year + 1900
 urls  <- paste0('http://cran-logs.rstudio.com/', years, '/', days, '.csv.gz')
 paths <- paste0("logs/", days, ".csv.gz")
 
+if( !file.exists( "logs") ) dir.create( "logs" )
 missing <- !(paths %in% dir("logs", full.name = TRUE))
 ok <- Map(download.file, urls[missing], paths[missing])
 
