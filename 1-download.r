@@ -10,7 +10,7 @@ years <- as.POSIXlt(days)$year + 1900
 urls  <- paste0('http://cran-logs.rstudio.com/', years, '/', days, '.csv.gz')
 paths <- paste0("logs/", days, ".csv.gz")
 
-if( !file.exists( "logs") ) dir.create( "logs" )
+if(!file.exists("logs")) dir.create("logs")
 missing <- !(paths %in% dir("logs", full.name = TRUE))
 ok <- Map(download.file, urls[missing], paths[missing])
 
