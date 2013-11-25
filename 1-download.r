@@ -17,7 +17,13 @@ ok <- Map(download.file, urls[missing], paths[missing])
 # Read all csv files and merge -------------------------------------------------
 
 logs <- dir("logs", full.name = TRUE)
-all_pkgs <- lapply(logs, read.csv, stringsAsFactors = FALSE)
+all_pkgs <- lapply(logs, function(file){
+  data <- read.csv(file, stringsAsFactors = FALSE)
+  data$r_version <- as.character(data$r_version)
+  data$r_arch    <- as.character(data$r_arch)
+  data$r_os      <- as.character(data$r_os)
+  data
+})
 
 all <- rbind.fill(all_pkgs)
 all$date <- as.Date(all$date)
