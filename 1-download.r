@@ -27,8 +27,7 @@ all_pkgs <- llply(logs, function(file){
   data
 }, .progress = "text")
 
-rbind_list(all_pkgs)
-all <- rbind.fill(all_pkgs)
+all <- dplyr:::rbind_all(all_pkgs)
 all$date <- as.Date(all$date)
 class(all) <- c("tbl_cpp", "tbl", class(all))
 
