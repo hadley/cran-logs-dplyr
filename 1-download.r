@@ -24,11 +24,11 @@ all_pkgs <- llply(logs, function(file){
   data$r_version <- as.character(data$r_version)
   data$r_arch    <- as.character(data$r_arch)
   data$r_os      <- as.character(data$r_os)
+  data$date      <- as.Date(data$date)
   data
 }, .progress = "text")
 
 all <- dplyr::rbind_all(all_pkgs)
-all$date <- as.Date(all$date)
 class(all) <- c("tbl_cpp", "tbl", class(all))
 
 saveRDS(all, file = "logs.rds")
