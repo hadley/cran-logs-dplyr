@@ -28,7 +28,7 @@ all_pkgs <- llply(logs, function(file){
   data
 }, .progress = "text")
 
-all <- dplyr::rbind_all(all_pkgs)
-class(all) <- c("tbl_cpp", "tbl", class(all))
+all <- rbind_all(all_pkgs)
+class(all) <- c("tbl_df", "tbl", "data.frame")
 
 saveRDS(all, file = "logs.rds")

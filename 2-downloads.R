@@ -14,7 +14,7 @@ qplot(date, n / 1e3, data = daily, geom = "line") + ylab("Downloads (000s)")
 ggsave("images/daily.pdf", width = 8, height = 6)
 
 # Daily downloads by version (for top 5 versions)
-top5 <- daily_ver %.% ungroup() %.% group_by(r_version) %.% 
+top5 <- daily_ver %.% group_by(r_version, add = FALSE) %.% 
   summarise(n = sum(n)) %.% arrange(desc(n)) %.% head(5)
 
 daily_common <- semi_join(daily_ver, top5, by = "r_version")
